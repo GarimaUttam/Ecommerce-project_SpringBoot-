@@ -1,21 +1,23 @@
 package com.garima.ecom_project.model;
 
+
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Product {
 
     @Id
@@ -26,7 +28,9 @@ public class Product {
     private String brand;
     private BigDecimal price;
     private String category;
-    private Date releasedate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy")
+    private Date releaseDate;
     private boolean available;
     private int quantity;
 
@@ -78,12 +82,12 @@ public class Product {
         this.category = category;
     }
 
-    public Date getReleasedate() {
-        return releasedate;
+    public Date getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setReleasedate(Date releasedate) {
-        this.releasedate = releasedate;
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public boolean isAvailable() {
@@ -102,12 +106,3 @@ public class Product {
         this.quantity = quantity;
     }
 }
-
-//SQL query
-//
-//INSERT INTO product (name, desc, brand, price, category, release_date, available, quantity)
-//VALUES ('Tata Nexon', 'A compact SUV with excellent safety features and performance.', 'Tata Motors', 750000.00, 'Cars', '2024-01-15', true, 50),
-//('Maruti Suzuki Swift', 'A popular hatchback known for its fuel efficiency and reliability.', 'Maruti Suzuki', 550000.00, 'Cars', '2024-02-01', true, 100),
-//        ('Hyundai Creta', 'A stylish SUV with advanced features and comfortable interior.', 'Hyundai', 950000.00, 'Cars', '2024-03-01', true, 75),
-//        ('Mahindra Thar', 'A rugged off-road SUV with a powerful engine and modern amenities.', 'Mahindra', 1200000.00, 'Cars', '2024-04-01', true, 30),
-//        ('Honda city', 'A premium sedan car', 'Honda', 84729348, 'Cars', '2025-05-29', true, 34);
