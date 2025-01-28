@@ -38,16 +38,16 @@ public class ProductController {
     public ResponseEntity<Product> getProduct(@PathVariable int id){
 
         Product product = service.getProductById(id);
-       if(product != null){
-           return new ResponseEntity<>(product, HttpStatus.OK);
-       }
-       else {
-           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-       }
+        if(product != null){
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
     @PostMapping("/product")
     public ResponseEntity<?> addProduct(@RequestPart Product product,
-        @RequestPart MultipartFile imageFile){
+                                        @RequestPart MultipartFile imageFile){
         try{
             System.out.println(product);
             Product product1 = service.addProduct(product, imageFile);
@@ -94,5 +94,12 @@ public class ProductController {
         else{
             return new ResponseEntity<>("Product Not found", HttpStatus.NOT_FOUND);
         }
+    }
+    @GetMapping("/products/search")
+    public ResponseEntity<List<Product>> searchProducts(@RequestParam String keyword) {
+
+        List<Product> products = service.searchProducts(keyword);
+        System.out.println("searching with " + keyword);
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }
